@@ -27,9 +27,16 @@ const Footer = () => (
     {/* CTA band — green → ink, matching the reference model */}
     <div className="relative overflow-hidden bg-[linear-gradient(180deg,#22c55e_0%,#16a34a_42%,#111827_100%)]">
       <div aria-hidden className="pointer-events-none absolute inset-0">
-        <div className="absolute left-1/2 top-[-18%] size-[min(90vw,42rem)] -translate-x-1/2 rounded-full border border-white/20" />
-        <div className="absolute left-1/2 top-[-8%] size-[min(70vw,30rem)] -translate-x-1/2 rounded-full border border-white/15" />
-        <div className="absolute left-1/2 top-[4%] size-[min(48vw,18rem)] -translate-x-1/2 rounded-full border border-white/10" />
+        {/* Soft breathing rings */}
+        <div className="absolute left-1/2 top-[-18%] size-[min(90vw,42rem)] -translate-x-1/2 animate-ring-breathe rounded-full border border-white/25 [animation-delay:0s]" />
+        <div className="absolute left-1/2 top-[-8%] size-[min(70vw,30rem)] -translate-x-1/2 animate-ring-breathe rounded-full border border-white/20 [animation-delay:-3s] [animation-duration:11s]" />
+        <div className="absolute left-1/2 top-[4%] size-[min(48vw,18rem)] -translate-x-1/2 animate-ring-breathe rounded-full border border-white/15 [animation-delay:-6s] [animation-duration:13s]" />
+
+        {/* Outward ripple rings for extra motion */}
+        <div className="absolute left-1/2 top-[-2%] size-[min(56vw,22rem)] -translate-x-1/2 animate-ring-ripple rounded-full border border-white/25 [animation-delay:0s]" />
+        <div className="absolute left-1/2 top-[-2%] size-[min(56vw,22rem)] -translate-x-1/2 animate-ring-ripple rounded-full border border-white/20 [animation-delay:-2.3s]" />
+        <div className="absolute left-1/2 top-[-2%] size-[min(56vw,22rem)] -translate-x-1/2 animate-ring-ripple rounded-full border border-white/15 [animation-delay:-4.6s]" />
+
         <div className="absolute inset-x-0 bottom-0 h-28 bg-gradient-to-b from-transparent to-ink" />
       </div>
 
@@ -45,7 +52,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Schedule a pickup on WhatsApp"
-          className="mt-8 inline-grid size-11 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/35 transition duration-200 ease-soft hover:bg-white/25"
+          className="mt-8 inline-grid size-11 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/35 transition duration-200 ease-soft hover:bg-white/25 hover:ring-white/50"
         >
           <ArrowRight className="size-5" strokeWidth={2.2} />
         </a>

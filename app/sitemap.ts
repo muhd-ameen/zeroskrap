@@ -1,13 +1,19 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/constants";
 
-/** Marketing homepage plus the standalone booking page. */
+/** Marketing homepage plus standalone materials and booking pages. */
 const sitemap = (): MetadataRoute.Sitemap => [
   {
     url: SITE.url,
     lastModified: new Date(),
     changeFrequency: "monthly",
     priority: 1,
+  },
+  {
+    url: `${SITE.url}/materials`,
+    lastModified: new Date(),
+    changeFrequency: "monthly",
+    priority: 0.9,
   },
   {
     url: `${SITE.url}/contact`,

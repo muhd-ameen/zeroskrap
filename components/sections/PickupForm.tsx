@@ -3,12 +3,13 @@
 import { useId, useState, type FormEvent } from "react";
 import { ArrowRight } from "lucide-react";
 import { SITE, whatsappLink } from "@/lib/constants";
+import { cn } from "@/lib/utils";
 
 /**
  * Frontend-only pickup request: validates the number, then hands the visitor
  * over to WhatsApp with a pre-filled message. No backend required.
  */
-export const PickupForm = () => {
+export const PickupForm = ({ className }: { className?: string }) => {
   const inputId = useId();
   const errorId = `${inputId}-error`;
   const [phone, setPhone] = useState("");
@@ -34,10 +35,10 @@ export const PickupForm = () => {
   };
 
   return (
-    <div className="mt-9 w-full max-w-xl">
+    <div className={cn("mt-9 w-full max-w-xl", className)}>
       <label
         htmlFor={inputId}
-        className="block text-center text-[0.9375rem] font-semibold text-brand-700"
+        className="block text-center text-[0.9375rem] font-semibold text-brand-700 lg:text-left"
       >
         Book a free pickup
       </label>
@@ -83,7 +84,7 @@ export const PickupForm = () => {
       <p
         id={error ? errorId : undefined}
         role={error ? "alert" : undefined}
-        className={`mt-3 text-center text-sm ${
+        className={`mt-3 text-center text-sm lg:text-left ${
           error ? "text-red-600" : "text-muted"
         }`}
       >

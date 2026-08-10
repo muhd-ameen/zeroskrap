@@ -17,7 +17,7 @@ export const WhyChoose = () => (
       description="Clear prices, honest weighing and payment on the spot."
     />
 
-    <ul className="mt-10 grid gap-4 sm:grid-cols-2 lg:mt-12 lg:grid-cols-4 lg:gap-5">
+    <ul className="mt-10 grid grid-cols-2 gap-3 sm:gap-4 lg:mt-12 lg:grid-cols-4 lg:gap-5">
       {WHY_CHOOSE.map((feature) => (
         <FeatureCard
           key={feature.title}

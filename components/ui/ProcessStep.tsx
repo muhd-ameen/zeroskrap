@@ -15,15 +15,17 @@ export const ProcessStep = ({ index, title, icon }: ProcessStepProps) => {
 
   return (
     <li className="relative flex flex-col items-center text-center">
-      <span className="text-sm font-semibold tracking-[0.14em] text-brand-600">
+      <span className="text-[0.6875rem] font-semibold tracking-[0.14em] text-brand-600 sm:text-sm">
         {label}
       </span>
 
-      <span className="relative z-10 mt-4 grid size-16 place-items-center rounded-2xl bg-brand-500 text-white shadow-soft ring-8 ring-white md:size-[4.5rem]">
-        <Icon name={icon} className="size-7 md:size-8" />
+      <span className="relative z-10 mt-3 grid size-12 place-items-center rounded-xl bg-brand-500 text-white shadow-soft ring-4 ring-white sm:mt-4 sm:size-16 sm:rounded-2xl sm:ring-8 md:size-[4.5rem]">
+        <Icon name={icon} className="size-5 sm:size-7 md:size-8" />
       </span>
 
-      <h3 className="mt-6 text-xl font-semibold lg:text-2xl">{title}</h3>
+      <h3 className="mt-4 text-sm font-semibold leading-snug sm:mt-6 sm:text-xl lg:text-2xl">
+        {title}
+      </h3>
     </li>
   );
 };

@@ -3,7 +3,6 @@ import { Poppins } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
-import { FloatingActions } from "@/components/layout/FloatingActions";
 import { SITE } from "@/lib/constants";
 import { localBusinessSchema } from "@/lib/schema";
 
@@ -93,7 +92,6 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <Navbar />
       <main id="main">{children}</main>
       <Footer />
-      <FloatingActions />
 
       <script
         type="application/ld+json"

@@ -25,11 +25,11 @@ export const Process = () => (
       }
     />
 
-    <ol className="relative mt-14 grid gap-12 md:grid-cols-3 md:gap-6 lg:mt-16 lg:gap-10">
+    <ol className="relative mt-10 grid grid-cols-3 gap-3 md:mt-14 md:gap-6 lg:mt-16 lg:gap-10">
       {/* Connector sits behind the icon badges (white ring masks the line). */}
       <span
         aria-hidden
-        className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-[3.85rem] hidden h-0.5 bg-brand-200 md:block lg:top-[4.1rem]"
+        className="pointer-events-none absolute left-[16.66%] right-[16.66%] top-[3.25rem] h-0.5 bg-brand-200 md:top-[3.85rem] lg:top-[4.1rem]"
       />
 
       {PROCESS_STEPS.map((step, index) => (

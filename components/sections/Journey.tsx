@@ -22,32 +22,32 @@ export const Journey = () => (
       description="Nothing we collect disappears."
     />
 
-    <ol className="mt-12 grid gap-6 sm:grid-cols-2 lg:mt-16 lg:grid-cols-4">
+    <ol className="mt-8 grid grid-cols-2 gap-3 sm:mt-12 sm:gap-6 lg:mt-16 lg:grid-cols-4">
       {JOURNEY_STEPS.map((step, index) => (
         <li
           key={step.number}
-          className="relative rounded-card border border-line bg-white p-5 md:p-6"
+          className="relative rounded-card border border-line bg-white p-3 sm:p-5 md:p-6"
         >
-          <div className="relative grid aspect-[4/3] place-items-center rounded-2xl bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)]">
+          <div className="relative grid aspect-[4/3] place-items-center rounded-xl bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)] sm:rounded-2xl">
             <Image
               src={step.image}
               alt=""
               width={step.imageWidth}
               height={step.imageHeight}
-              sizes="160px"
-              className="max-h-[76%] w-auto max-w-[64%] object-contain"
+              sizes="(min-width: 1024px) 160px, 28vw"
+              className="max-h-[70%] w-auto max-w-[58%] object-contain sm:max-h-[76%] sm:max-w-[64%]"
             />
 
-            <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-xs font-bold tracking-wide text-brand-600">
+            <span className="absolute left-2 top-2 rounded-full bg-white px-2 py-0.5 text-[0.625rem] font-bold tracking-wide text-brand-600 sm:left-3 sm:top-3 sm:px-2.5 sm:py-1 sm:text-xs">
               {step.number}
             </span>
           </div>
 
-          <h3 className="mt-5 text-lg font-semibold leading-snug">
+          <h3 className="mt-3 text-sm font-semibold leading-snug sm:mt-5 sm:text-lg">
             {step.title}
           </h3>
 
-          <p className="mt-2 text-[0.9375rem] leading-relaxed text-muted">
+          <p className="mt-2 hidden text-[0.9375rem] leading-relaxed text-muted sm:block">
             {step.description}
           </p>
 

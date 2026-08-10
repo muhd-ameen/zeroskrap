@@ -55,20 +55,34 @@ export const WHATSAPP_MESSAGES = {
   callback: `Hi ${SITE.name}, please call me back about a scrap pickup.`,
 } as const;
 
+export type Region = {
+  id: string;
+  label: string;
+  flag: string;
+  available: boolean;
+};
+
+/** Service regions shown in the navbar. Unavailable entries stay visible but disabled. */
+export const REGIONS: readonly Region[] = [
+  { id: "mauritius", label: "Mauritius", flag: "🇲🇺", available: false },
+  { id: "kerala", label: "Kerala, India", flag: "🇮🇳", available: true },
+  { id: "uae", label: "UAE", flag: "🇦🇪", available: false },
+] as const;
+
 export type NavLink = {
   label: string;
   href: string;
 };
 
 /**
- * Primary navigation. The hashes are root-relative so they also work from
- * /contact: /#about → trust banner, /#materials → materials grid,
- * /#services → clearance services. Contact is its own route.
+ * Primary navigation. Hash links are root-relative so they resolve from any
+ * route (/contact, /materials). Materials and Contact are standalone pages;
+ * About and Services still jump to homepage sections.
  */
 export const NAV_LINKS: readonly NavLink[] = [
   { label: "Home", href: "/#top" },
   { label: "About", href: "/#about" },
-  { label: "Materials", href: "/#materials" },
+  { label: "Materials", href: "/materials" },
   { label: "Services", href: "/#services" },
   { label: "Contact", href: "/contact" },
 ] as const;

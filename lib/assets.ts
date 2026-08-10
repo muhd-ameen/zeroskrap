@@ -14,6 +14,9 @@ export const ASSETS = {
   /** REAL ASSET - ZeroSkrap mark, transparent PNG, square 1:1. */
   logoMark: "/logo/zeroskrap-mark.png",
 
+  /** REAL ASSET - hero weighing diorama, transparent WebP, portrait ~0.72:1. */
+  hero: "/images/hero/hero.webp",
+
   /** REAL ASSET - industrial weighbridge with scrap truck, landscape ~1.12:1. */
   trustWeighing: "/images/trust/scale.webp",
 

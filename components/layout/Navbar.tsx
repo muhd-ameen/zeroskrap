@@ -4,6 +4,7 @@ import { Button } from "@/components/ui/Button";
 import { InstagramIcon } from "@/components/ui/BrandIcons";
 import { Logo } from "@/components/ui/Logo";
 import { MobileNav } from "./MobileNav";
+import { RegionDropdown } from "./RegionDropdown";
 import {
   CONTACT,
   NAV_LINKS,
@@ -46,6 +47,7 @@ export const Navbar = () => (
           <Button href={whatsappLink(WHATSAPP_MESSAGES.general)}>
             Book Pickup
           </Button>
+          <RegionDropdown />
         </div>
 
         <MobileNav />

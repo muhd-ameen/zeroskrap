@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
+import { RegionDropdown } from "./RegionDropdown";
 import {
   CONTACT,
   NAV_LINKS,
@@ -78,6 +79,8 @@ export const MobileNav = () => {
           </ul>
 
           <div className="flex flex-col gap-3 border-t border-line pt-6">
+            <RegionDropdown fullWidth />
+
             <Button
               href={whatsappLink(WHATSAPP_MESSAGES.general)}
               size="lg"

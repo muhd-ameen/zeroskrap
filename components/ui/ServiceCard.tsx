@@ -22,15 +22,20 @@ export const ServiceCard = ({
   <Card
     as="li"
     interactive
-    className={cn("group flex gap-4 p-5 md:p-6", className)}
+    className={cn(
+      "group flex flex-col gap-3 p-4 sm:flex-row sm:gap-4 sm:p-5 md:p-6",
+      className,
+    )}
   >
-    <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-colors duration-300 ease-soft group-hover:bg-brand-500 group-hover:text-white group-hover:ring-brand-500">
-      <Icon name={icon} className="size-[1.375rem]" />
+    <span className="grid size-10 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100 transition-colors duration-300 ease-soft group-hover:bg-brand-500 group-hover:text-white group-hover:ring-brand-500 sm:size-11">
+      <Icon name={icon} className="size-5 sm:size-[1.375rem]" />
     </span>
 
     <div>
-      <h3 className="text-base font-semibold leading-snug">{title}</h3>
-      <p className="mt-1.5 text-pretty text-sm leading-relaxed text-muted">
+      <h3 className="text-sm font-semibold leading-snug sm:text-base">
+        {title}
+      </h3>
+      <p className="mt-1.5 hidden text-pretty text-sm leading-relaxed text-muted sm:block">
         {description}
       </p>
     </div>
