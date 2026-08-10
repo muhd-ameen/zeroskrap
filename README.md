@@ -55,16 +55,17 @@ All colour, radius, shadow and easing values live in the `@theme` block of
 Layout rhythm comes from two primitives — `Container` (1200px max width,
 24/48/80px gutters) and `Section` (vertical spacing).
 
-## Replacing the placeholder assets
+## Swapping assets
 
-Every image is registered in **`lib/assets.ts`**. Drop the real file into
+Every image is registered in **`lib/assets.ts`**. Drop the new file into
 `public/` and change the path there — no component or layout edits needed.
+Keep the aspect ratio so spacing stays identical after the swap.
 
-| Asset             | Current placeholder                    | Ratio |
-| ----------------- | -------------------------------------- | ----- |
-| `heroFloatLeft`   | `public/images/hero/float-left.svg`     | ~5:8  |
-| `heroFloatRight`  | `public/images/hero/float-right.svg`    | ~5:8  |
-| `trustWeighing`   | `public/images/trust/digital-weighing.svg` | 4:3 |
+| Asset            | Current file                                 | Ratio   |
+| ---------------- | -------------------------------------------- | ------- |
+| `trustWeighing`  | `public/images/trust/scale.webp`             | ~1.12:1 |
+| `truck`          | `public/images/sections/truck.webp`          | ~1.73:1 |
+| `sustainability` | `public/images/sections/sustainability.webp` | ~1.22:1 |
 
 ## Logo and icons
 

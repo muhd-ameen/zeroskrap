@@ -1,10 +1,9 @@
 /* --------------------------------------------------------------------------
    Asset registry - every image path used by the site.
 
-   All files below are PLACEHOLDERS. To ship the real brand assets, drop the
-   new file into `public/` and change the path here only; no component or
-   layout needs to be touched. Keep the aspect ratios noted next to each entry
-   so spacing stays identical after the swap.
+   To swap an asset, drop the new file into `public/` and change the path here
+   only; no component or layout needs to be touched. Keep the aspect ratios
+   noted next to each entry so spacing stays identical after the swap.
 
    Material photos are the exception: they live on each entry in
    `lib/data.ts` (`MATERIALS[].image`). Until a path is set, the card renders
