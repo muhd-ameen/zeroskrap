@@ -1,0 +1,42 @@
+<!-- PLACEHOLDER - decorative hero objects (right side).
+     Replace with the real 3D scrap renders at the same ~5:8 portrait ratio. -->
+<svg width="200" height="320" viewBox="0 0 200 320" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="tileR" x1="0" y1="0" x2="1" y2="1">
+      <stop stop-color="#F0FDF4"/>
+      <stop offset="1" stop-color="#DCFCE7"/>
+    </linearGradient>
+  </defs>
+
+  <circle cx="140" cy="80" r="58" fill="#DCFCE7" opacity="0.45"/>
+  <circle cx="56" cy="248" r="50" fill="#DCFCE7" opacity="0.35"/>
+
+  <!-- Newspaper / cardboard -->
+  <g transform="translate(66 18) rotate(7 44 44)">
+    <rect width="88" height="88" rx="24" fill="url(#tileR)" stroke="#BBF7D0" stroke-width="1.5"/>
+    <g stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M20 26 h40 a4 4 0 0 1 4 4 v32 a6 6 0 0 0 6 6 h-46 a4 4 0 0 1 -4 -4 z"/>
+      <path d="M28 36 h24 M28 44 h24 M28 52 h16"/>
+    </g>
+  </g>
+
+  <!-- Battery -->
+  <g transform="translate(112 138) rotate(-9 38 38)">
+    <rect width="76" height="76" rx="22" fill="url(#tileR)" stroke="#BBF7D0" stroke-width="1.5"/>
+    <g stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <path d="M18 30 h34 a4 4 0 0 1 4 4 v14 a4 4 0 0 1 -4 4 h-34 a4 4 0 0 1 -4 -4 v-14 a4 4 0 0 1 4 -4 z"/>
+      <path d="M60 36 v10"/>
+      <path d="M22 24 h8 M40 24 h8"/>
+    </g>
+  </g>
+
+  <!-- Aluminium can -->
+  <g transform="translate(30 226) rotate(6 44 44)">
+    <rect width="88" height="88" rx="24" fill="url(#tileR)" stroke="#BBF7D0" stroke-width="1.5"/>
+    <g stroke="#16A34A" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none">
+      <ellipse cx="44" cy="26" rx="14" ry="6"/>
+      <path d="M30 26 v34 a14 6 0 0 0 28 0 v-34"/>
+      <path d="M32 42 h24"/>
+    </g>
+  </g>
+</svg>
