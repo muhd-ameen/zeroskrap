@@ -7,7 +7,7 @@
    off. WhatsApp silently falls back to a tiny thumbnail when the image is
    heavy, hence JPEG instead of PNG.
 
-   Usage: node scripts/build-share-image.mjs [--source seo-pop.webp] [--quality 84]
+   Usage: node scripts/build-share-image.mjs [--source og-source.png] [--quality 85]
    `--source` is resolved relative to `assets`.
    -------------------------------------------------------------------------- */
 
@@ -20,23 +20,16 @@ const ROOT = new URL("..", import.meta.url).pathname;
 const args = process.argv.slice(2);
 const sourceName = args.includes("--source")
   ? args[args.indexOf("--source") + 1]
-  : "seo-pop.webp";
-const quality = Number(args[args.indexOf("--quality") + 1]) || 84;
+  : "og-source.png";
+const quality = Number(args[args.indexOf("--quality") + 1]) || 85;
 
 const source = join(ROOT, "assets", sourceName);
 const target = join(ROOT, "public/og-image.jpg");
 
-/* The screenshot opens on a sliver of the row above; drop it so the card
-   starts on a full row of tiles. */
-const TRIM_TOP = 50;
-
-const { width = 0, height = 0 } = await sharp(source).metadata();
-
 await sharp(source)
-  .extract({ left: 0, top: TRIM_TOP, width, height: height - TRIM_TOP - 14 })
   .resize(1200, 630, { fit: "contain", background: "#ffffff" })
   .flatten({ background: "#ffffff" })
-  .jpeg({ quality, mozjpeg: true, chromaSubsampling: "4:4:4" })
+  .jpeg({ quality, mozjpeg: true, chromaSubsampling: "4:2:0" })
   .toFile(target);
 
 const { size } = await stat(target);

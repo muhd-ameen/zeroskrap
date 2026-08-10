@@ -13,7 +13,7 @@ export const Hero = () => (
   <section id="top" className="relative overflow-hidden bg-canvas">
     <Container className="relative">
       <div className="grid items-center gap-10 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-24 lg:pt-20">
-        <div className="flex flex-col items-center text-center lg:items-start lg:text-left">
+        <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
           <span className="inline-flex animate-fade-in items-center gap-2.5 rounded-full border border-brand-200 bg-white py-1.5 pl-2 pr-4 text-[0.8125rem] font-medium text-brand-800 sm:text-sm">
             <MauritiusFlag className="h-[1.125rem] w-[1.6875rem] shrink-0 rounded-[0.3rem]" />
             {CONTACT.coverage}
@@ -23,7 +23,7 @@ export const Hero = () => (
             Turn Your Scrap <span className="text-brand-500">Into Cash</span>
           </h1>
 
-          <p className="mt-5 flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[1.0625rem] text-muted md:text-[1.25rem] lg:justify-start">
+          <p className="mt-5 flex max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[1.0625rem] text-muted md:gap-x-3 md:text-[1.25rem] lg:justify-start">
             <span>Schedule</span>
             <ArrowRight aria-hidden className="size-5 shrink-0 text-brand-500" />
             <span>We Collect</span>
@@ -31,9 +31,9 @@ export const Hero = () => (
             <span>You Get Paid Instantly</span>
           </p>
 
-          <PickupForm className="lg:mx-0" />
+          <PickupForm className="self-stretch sm:self-center lg:self-start" />
 
-          <div className="mt-6 flex w-full flex-col items-center gap-3 sm:w-auto sm:flex-row sm:justify-center lg:justify-start">
+          <div className="mt-6 flex w-full min-w-0 flex-col items-center gap-3 sm:w-auto sm:flex-row sm:justify-center lg:justify-start">
             <Button
               href={whatsappLink(WHATSAPP_MESSAGES.general)}
               size="lg"

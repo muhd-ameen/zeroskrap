@@ -14,8 +14,8 @@ const poppins = Poppins({
 });
 
 /* WhatsApp only renders a large preview for images it can fetch quickly, so
-   this card is kept at 1200x630 and well under 300 KB. Regenerate with
-   `node scripts/build-share-image.mjs` after replacing the source screenshot. */
+   this card is kept at 1200x630 and well under 300 KB. Replace
+   `assets/og-source.png` then run `node scripts/build-share-image.mjs`. */
 const SHARE_IMAGE = {
   url: "/og-image.jpg",
   width: 1200,

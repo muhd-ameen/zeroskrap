@@ -35,7 +35,7 @@ export const PickupForm = ({ className }: { className?: string }) => {
   };
 
   return (
-    <div className={cn("mt-9 w-full max-w-xl", className)}>
+    <div className={cn("mt-9 w-full min-w-0 max-w-xl", className)}>
       <label
         htmlFor={inputId}
         className="block text-center text-[0.9375rem] font-semibold text-brand-700 lg:text-left"
@@ -43,14 +43,19 @@ export const PickupForm = ({ className }: { className?: string }) => {
         Book a free pickup
       </label>
 
-      <div className="mt-3 rounded-full bg-brand-100/70 p-2">
-        <div className="rounded-full bg-brand-200/60 p-1.5">
+      {/* min-w-0 on every nested flex/block level: iOS inputs have a large
+          intrinsic min-width that otherwise blows past the viewport, and the
+          hero's items-center + overflow-hidden then clips the left side. */}
+      <div className="mt-3 w-full min-w-0 rounded-full bg-brand-100/70 p-1.5 sm:p-2">
+        <div className="w-full min-w-0 rounded-full bg-brand-200/60 p-1 sm:p-1.5">
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="flex items-center gap-2.5 rounded-full bg-white py-2 pl-4 pr-2 ring-1 ring-brand-100 sm:gap-3 sm:pl-5"
+            className="flex w-full min-w-0 items-center gap-2 rounded-full bg-white py-1.5 pl-3.5 pr-1.5 ring-1 ring-brand-100 sm:gap-3 sm:py-2 sm:pl-5 sm:pr-2"
           >
-            <span className="text-[0.9375rem] font-medium text-muted">+230</span>
+            <span className="shrink-0 text-[0.9375rem] font-medium text-muted">
+              +230
+            </span>
             <span aria-hidden className="h-6 w-px shrink-0 bg-line" />
 
             <input
@@ -61,19 +66,20 @@ export const PickupForm = ({ className }: { className?: string }) => {
               autoComplete="tel"
               placeholder="Enter mobile number"
               value={phone}
+              size={1}
               onChange={(event) => {
                 setPhone(event.target.value);
                 if (error) setError(null);
               }}
               aria-invalid={Boolean(error)}
               aria-describedby={error ? errorId : undefined}
-              className="min-w-0 flex-1 bg-transparent py-2.5 text-[0.9375rem] text-ink outline-none placeholder:text-muted sm:text-base"
+              className="w-full min-w-0 flex-1 bg-transparent py-2.5 text-[0.9375rem] text-ink outline-none placeholder:text-muted sm:text-base"
             />
 
             <button
               type="submit"
               aria-label="Request a pickup on WhatsApp"
-              className="grid size-12 shrink-0 place-items-center rounded-full bg-brand-700 text-white transition duration-200 ease-soft hover:bg-brand-800 active:scale-95"
+              className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-700 text-white transition duration-200 ease-soft hover:bg-brand-800 active:scale-95 sm:size-12"
             >
               <ArrowRight className="size-5" strokeWidth={2.2} />
             </button>
