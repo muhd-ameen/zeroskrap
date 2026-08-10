@@ -60,13 +60,27 @@ export type Region = {
   label: string;
   flag: string;
   available: boolean;
+  /** Shown when the region cannot be selected (e.g. Soon / Active). */
+  badge?: "Soon" | "Active";
 };
 
 /** Service regions shown in the navbar. Unavailable entries stay visible but disabled. */
 export const REGIONS: readonly Region[] = [
-  { id: "mauritius", label: "Mauritius", flag: "🇲🇺", available: false },
-  { id: "kerala", label: "Kerala, India", flag: "🇮🇳", available: true },
-  { id: "uae", label: "UAE", flag: "🇦🇪", available: false },
+  { id: "mauritius", label: "Mauritius", flag: "🇲🇺", available: true },
+  {
+    id: "kerala",
+    label: "Kerala, India",
+    flag: "🇮🇳",
+    available: false,
+    badge: "Active",
+  },
+  {
+    id: "uae",
+    label: "UAE",
+    flag: "🇦🇪",
+    available: false,
+    badge: "Soon",
+  },
 ] as const;
 
 export type NavLink = {

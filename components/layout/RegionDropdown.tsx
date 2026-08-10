@@ -101,9 +101,16 @@ export const RegionDropdown = ({
                   </span>
                   <span>{region.label}</span>
                 </span>
-                {!region.available ? (
-                  <span className="text-xs font-medium text-muted/60">
-                    Soon
+                {!region.available && region.badge ? (
+                  <span
+                    className={cn(
+                      "text-xs font-medium",
+                      region.badge === "Active"
+                        ? "text-brand-600"
+                        : "text-muted/60",
+                    )}
+                  >
+                    {region.badge}
                   </span>
                 ) : null}
               </button>
