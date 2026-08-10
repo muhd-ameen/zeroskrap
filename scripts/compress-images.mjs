@@ -3,8 +3,8 @@
    pixel dimensions, then removes the source PNGs.
 
    `public/logo`, `app/icon.png` and `app/apple-icon.png` are deliberately out
-   of scope: Satori (used by `app/opengraph-image.tsx`) and the browser favicon
-   conventions both need real PNG input.
+   of scope: the browser favicon conventions need real PNG input. The share
+   card is handled separately by `scripts/build-share-image.mjs`.
 
    Usage: node scripts/compress-images.mjs [--keep] [--quality 90]
    -------------------------------------------------------------------------- */

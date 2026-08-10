@@ -1,33 +1,16 @@
-import Image from "next/image";
 import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Container } from "@/components/ui/Container";
 import { Icon } from "@/components/ui/Icon";
 import { MauritiusFlag, WhatsAppIcon } from "@/components/ui/BrandIcons";
+import { HeroFloats } from "./HeroFloats";
 import { PickupForm } from "./PickupForm";
-import { ASSETS } from "@/lib/assets";
 import { CONTACT, WHATSAPP_MESSAGES, whatsappLink } from "@/lib/constants";
 import { HERO_HIGHLIGHTS } from "@/lib/data";
 
 export const Hero = () => (
   <section id="top" className="relative overflow-hidden bg-canvas">
-    {/* PLACEHOLDER illustrations - decorative only, hidden on smaller screens. */}
-    <div aria-hidden className="pointer-events-none absolute inset-0 hidden xl:block">
-      <Image
-        src={ASSETS.heroFloatLeft}
-        alt=""
-        width={240}
-        height={384}
-        className="absolute left-[1%] top-52 2xl:left-[4%]"
-      />
-      <Image
-        src={ASSETS.heroFloatRight}
-        alt=""
-        width={240}
-        height={384}
-        className="absolute right-[1%] top-60 2xl:right-[4%]"
-      />
-    </div>
+    <HeroFloats />
 
     <Container className="relative">
       <div className="flex flex-col items-center pb-16 pt-12 text-center md:pb-20 md:pt-16 lg:pb-28 lg:pt-24">

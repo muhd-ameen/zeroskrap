@@ -15,10 +15,6 @@ export const ASSETS = {
   /** REAL ASSET - ZeroSkrap mark, transparent PNG, square 1:1. */
   logoMark: "/logo/zeroskrap-mark.png",
 
-  /** Decorative hero objects, flanking the headline. Portrait ~3:4. */
-  heroFloatLeft: "/images/hero/float-left.svg",
-  heroFloatRight: "/images/hero/float-right.svg",
-
   /** REAL ASSET - industrial weighbridge with scrap truck, landscape ~1.12:1. */
   trustWeighing: "/images/trust/scale.webp",
 

@@ -132,9 +132,18 @@ message and hand off to WhatsApp. Nothing is stored or POSTed.
 ## SEO & social
 
 `app/robots.ts`, `app/sitemap.ts`, canonical URL, Open Graph + Twitter metadata,
-and LocalBusiness JSON-LD (`lib/schema.ts`). The share card and touch icon are
-generated at build time from `app/opengraph-image.tsx` and `app/apple-icon.tsx`
-— replace them by dropping a real `opengraph-image.png` (1200×630) into `app/`.
+and LocalBusiness JSON-LD (`lib/schema.ts`).
+
+The link preview card is `public/og-image.jpg` (1200×630, ~130 KB), declared in
+`app/layout.tsx` for both Open Graph and Twitter. It is built from the full-size
+source in `assets/` — that folder holds unprocessed artwork and is never served.
+To change the card, drop a new source image in `assets/` and run:
+
+```bash
+node scripts/build-share-image.mjs --source my-artwork.png
+```
+
+Keep it under 300 KB — WhatsApp downgrades heavier images to a tiny thumbnail.
 
 **Before deploying, set `SITE.url` in `lib/constants.ts` to the live domain.**
 robots, sitemap, canonical and OG URLs all derive from it.

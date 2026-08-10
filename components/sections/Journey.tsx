@@ -1,5 +1,5 @@
+import Image from "next/image";
 import { ArrowRight } from "lucide-react";
-import { Icon } from "@/components/ui/Icon";
 import { Section } from "@/components/ui/Section";
 import { SectionHeading } from "@/components/ui/SectionHeading";
 import { JOURNEY_STEPS } from "@/lib/data";
@@ -28,8 +28,15 @@ export const Journey = () => (
           key={step.number}
           className="relative rounded-card border border-line bg-white p-5 md:p-6"
         >
-          <div className="relative grid aspect-[4/3] place-items-center rounded-2xl bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)] text-brand-600">
-            <Icon name={step.icon} className="size-12" strokeWidth={1.5} />
+          <div className="relative grid aspect-[4/3] place-items-center rounded-2xl bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)]">
+            <Image
+              src={step.image}
+              alt=""
+              width={step.imageWidth}
+              height={step.imageHeight}
+              sizes="160px"
+              className="max-h-[76%] w-auto max-w-[64%] object-contain"
+            />
 
             <span className="absolute left-3 top-3 rounded-full bg-white px-2.5 py-1 text-xs font-bold tracking-wide text-brand-600">
               {step.number}

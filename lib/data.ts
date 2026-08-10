@@ -66,7 +66,10 @@ export type JourneyStep = {
   number: string;
   title: string;
   description: string;
-  icon: IconName;
+  /** 3D step icon in public/images/journey, transparent so it sits on the mint tile. */
+  image: string;
+  imageWidth: number;
+  imageHeight: number;
 };
 
 /* -------------------------------------------------------------------------- */
@@ -400,25 +403,33 @@ export const JOURNEY_STEPS: readonly JourneyStep[] = [
     number: "01",
     title: "Book a Pickup",
     description: "Tell us what you have.",
-    icon: "calendar",
+    image: "/images/journey/book.webp",
+    imageWidth: 312,
+    imageHeight: 320,
   },
   {
     number: "02",
     title: "We Collect & Weigh",
     description: "We load, weigh and pay you.",
-    icon: "truck",
+    image: "/images/journey/weight.webp",
+    imageWidth: 276,
+    imageHeight: 320,
   },
   {
     number: "03",
     title: "Sorted & Processed",
     description: "Separated and graded at our yard.",
-    icon: "sort",
+    image: "/images/journey/sort.webp",
+    imageWidth: 320,
+    imageHeight: 289,
   },
   {
     number: "04",
     title: "Back Into Industry",
     description: "Reused by manufacturers, not landfilled.",
-    icon: "recycle",
+    image: "/images/journey/industry.webp",
+    imageWidth: 320,
+    imageHeight: 284,
   },
 ] as const;
 

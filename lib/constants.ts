@@ -9,8 +9,7 @@ export const SITE = {
   positioning: "Mauritius' trusted scrap buyer and recycling partner",
   description:
     "ZeroSkrap buys scrap metal, e-waste, appliances and industrial waste across Mauritius. Free pickup, accurate digital weighing and instant payment.",
-  /* PLACEHOLDER - swap for the live domain before launch. */
-  url: "https://zeroskrap.mu",
+  url: "https://zeroskrap.com",
   locale: "en_MU",
 } as const;
 

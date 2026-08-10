@@ -14,6 +14,16 @@ const poppins = Poppins({
   display: "swap",
 });
 
+/* WhatsApp only renders a large preview for images it can fetch quickly, so
+   this card is kept at 1200x630 and well under 300 KB. Regenerate with
+   `node scripts/build-share-image.mjs` after replacing the source screenshot. */
+const SHARE_IMAGE = {
+  url: "/og-image.jpg",
+  width: 1200,
+  height: 630,
+  alt: `${SITE.name} - ${SITE.tagline}`,
+} as const;
+
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
   title: {
@@ -42,11 +52,21 @@ export const metadata: Metadata = {
     siteName: SITE.name,
     title: `${SITE.name} - ${SITE.tagline}`,
     description: SITE.description,
+    images: [
+      {
+        url: SHARE_IMAGE.url,
+        width: SHARE_IMAGE.width,
+        height: SHARE_IMAGE.height,
+        type: "image/jpeg",
+        alt: SHARE_IMAGE.alt,
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: `${SITE.name} - ${SITE.tagline}`,
     description: SITE.description,
+    images: [{ url: SHARE_IMAGE.url, alt: SHARE_IMAGE.alt }],
   },
   robots: {
     index: true,
