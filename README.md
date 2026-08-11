@@ -64,7 +64,7 @@ Keep the aspect ratio so spacing stays identical after the swap.
 | Asset            | Current file                                 | Ratio   |
 | ---------------- | -------------------------------------------- | ------- |
 | `trustWeighing`  | `public/images/trust/scale.webp`             | ~1.12:1 |
-| `truck`          | `public/images/sections/truck.webp`          | ~1.73:1 |
+| `truck`          | `public/images/sections/truck.webp`          | 1:1 |
 | `sustainability` | `public/images/sections/sustainability.webp` | ~1.22:1 |
 
 ## Logo and icons

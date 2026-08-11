@@ -26,7 +26,7 @@ export const ASSETS = {
   /** REAL ASSET - industrial weighbridge with scrap truck, landscape ~1.12:1. */
   trustWeighing: "/images/trust/scale.webp",
 
-  /** REAL ASSET - branded collection truck, transparent WebP, landscape ~1.73:1. */
+  /** REAL ASSET - branded collection truck, transparent WebP, square 1:1. */
   truck: "/images/sections/truck.webp",
 
   /** REAL ASSET - circular-economy diorama, transparent WebP, landscape ~1.22:1. */

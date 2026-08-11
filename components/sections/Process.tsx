@@ -67,8 +67,8 @@ export const Process = () => (
         <Image
           src={ASSETS.truck}
           alt="ZeroSkrap collection truck"
-          width={1232}
-          height={711}
+          width={1120}
+          height={1120}
           sizes="(min-width: 1024px) 560px, (min-width: 640px) 70vw, 88vw"
           className="h-auto w-full lg:justify-self-end"
         />
