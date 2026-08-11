@@ -31,9 +31,9 @@
   --color-surface: #ffffff;
 
   /* Radius --------------------------------------------------------------- */
-  --radius-btn: 1rem; /* 16px - buttons */
-  --radius-card: 1.5rem; /* 24px - cards  */
-  --radius-media: 2rem; /* 32px - image containers */
+  --radius-btn: 0; /* buttons — sharp */
+  --radius-card: 0; /* cards / section panels — sharp */
+  --radius-media: 0; /* image / media containers — sharp */
 
 
   /* Motion --------------------------------------------------------------- */

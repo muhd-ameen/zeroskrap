@@ -52,7 +52,7 @@ const Footer = () => (
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Schedule a pickup on WhatsApp"
-          className="mt-8 inline-grid size-11 place-items-center rounded-full bg-white/15 text-white ring-1 ring-white/35 transition duration-200 ease-soft hover:bg-white/25 hover:ring-white/50"
+          className="mt-8 inline-grid size-11 place-items-center rounded-btn bg-white/15 text-white ring-1 ring-white/35 transition duration-200 ease-soft hover:bg-white/25 hover:ring-white/50"
         >
           <ArrowRight className="size-5" strokeWidth={2.2} />
         </a>
@@ -73,7 +73,7 @@ const Footer = () => (
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label={label}
-                  className="grid size-10 place-items-center rounded-xl bg-white/[0.06] text-white ring-1 ring-white/20 transition duration-200 hover:bg-white/10"
+                  className="grid size-10 place-items-center rounded-btn bg-white/[0.06] text-white ring-1 ring-white/20 transition duration-200 hover:bg-white/10"
                 >
                   <Icon className="size-[1.125rem]" />
                 </a>
@@ -89,7 +89,7 @@ const Footer = () => (
             href={whatsappLink(WHATSAPP_MESSAGES.callback)}
             target="_blank"
             rel="noopener noreferrer"
-            className="mt-5 inline-flex items-center gap-2.5 rounded-full bg-white/[0.08] px-5 py-2.5 text-sm font-medium text-white ring-1 ring-white/20 transition duration-200 hover:bg-white/[0.14]"
+            className="mt-5 inline-flex items-center gap-2.5 rounded-btn bg-white/[0.08] px-5 py-2.5 text-sm font-medium text-white ring-1 ring-white/20 transition duration-200 hover:bg-white/[0.14]"
           >
             <Phone className="size-4" strokeWidth={1.9} />
             Request a callback

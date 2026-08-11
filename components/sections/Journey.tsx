@@ -28,7 +28,7 @@ export const Journey = () => (
           key={step.number}
           className="relative rounded-card border border-line bg-white p-3 sm:p-5 md:p-6"
         >
-          <div className="relative grid aspect-[4/3] place-items-center rounded-xl bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)] sm:rounded-2xl">
+          <div className="relative grid aspect-[4/3] place-items-center bg-[linear-gradient(140deg,#f0fdf4_0%,#dcfce7_100%)]">
             <Image
               src={step.image}
               alt=""

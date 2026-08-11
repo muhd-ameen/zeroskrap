@@ -8,7 +8,7 @@ import { SITE, whatsappLink } from "@/lib/constants";
 import { MATERIAL_OPTIONS, QUANTITY_OPTIONS } from "@/lib/data";
 
 const FIELD =
-  "w-full rounded-full border border-line bg-white px-5 py-3.5 text-[0.9375rem] text-ink outline-none transition duration-200 ease-soft placeholder:text-muted focus:border-brand-400 focus:ring-4 focus:ring-brand-100";
+  "w-full rounded-btn border border-line bg-white px-5 py-3.5 text-[0.9375rem] text-ink outline-none transition duration-200 ease-soft placeholder:text-muted focus:border-brand-400 focus:ring-4 focus:ring-brand-100";
 const LABEL = "block text-sm font-medium text-ink";
 const ERROR = "mt-1.5 text-sm text-red-600";
 
@@ -184,8 +184,8 @@ export const ContactForm = () => {
         )}
       </div>
 
-      <details className="group rounded-3xl border border-line bg-white px-5 py-4">
-        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 rounded-full text-sm font-medium text-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-100 [&::-webkit-details-marker]:hidden">
+      <details className="group rounded-card border border-line bg-white px-5 py-4">
+        <summary className="flex cursor-pointer list-none items-center justify-between gap-3 text-sm font-medium text-ink focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-brand-100 [&::-webkit-details-marker]:hidden">
           <span>
             Add scrap details{" "}
             <span className="font-normal text-muted">(optional)</span>
@@ -260,7 +260,7 @@ export const ContactForm = () => {
               placeholder="Anything else we should know before we come?"
               value={fields.message}
               onChange={(event) => update("message")(event.target.value)}
-              className={`mt-2 ${FIELD} resize-y rounded-3xl`}
+              className={`mt-2 ${FIELD} resize-y`}
             />
           </div>
         </div>

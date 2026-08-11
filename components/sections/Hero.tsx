@@ -28,7 +28,7 @@ export const Hero = () => (
 
     {/* Bottom-left content card — brand, headline, one line, one CTA */}
     <div className="relative z-10 w-full px-4 pb-6 pt-28 sm:px-6 sm:pb-8 md:px-10 md:pb-12 lg:px-14 lg:pb-14">
-      <div className="max-w-xl animate-fade-up rounded-[2rem] bg-[#eceeed]/95 p-7 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-9 md:max-w-[34rem] md:p-10">
+      <div className="max-w-xl animate-fade-up bg-[#eceeed]/95 p-7 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:p-9 md:max-w-[34rem] md:p-10">
         <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.14em] text-brand-700">
           {SITE.name}
         </p>
@@ -48,7 +48,7 @@ export const Hero = () => (
           href="/#how-it-works"
           variant="dark"
           size="md"
-          className="mt-7 rounded-full px-6"
+          className="mt-7 px-6"
         >
           See how it works
         </Button>

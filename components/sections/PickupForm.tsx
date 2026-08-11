@@ -46,12 +46,12 @@ export const PickupForm = ({ className }: { className?: string }) => {
       {/* min-w-0 on every nested flex/block level: iOS inputs have a large
           intrinsic min-width that otherwise blows past the viewport, and the
           hero's items-center + overflow-hidden then clips the left side. */}
-      <div className="mt-3 w-full min-w-0 rounded-full bg-brand-100/70 p-1.5 sm:p-2">
-        <div className="w-full min-w-0 rounded-full bg-brand-200/60 p-1 sm:p-1.5">
+      <div className="mt-3 w-full min-w-0 bg-brand-100/70 p-1.5 sm:p-2">
+        <div className="w-full min-w-0 bg-brand-200/60 p-1 sm:p-1.5">
           <form
             onSubmit={handleSubmit}
             noValidate
-            className="flex w-full min-w-0 items-center gap-2 rounded-full bg-white py-1.5 pl-3.5 pr-1.5 ring-1 ring-brand-100 sm:gap-3 sm:py-2 sm:pl-5 sm:pr-2"
+            className="flex w-full min-w-0 items-center gap-2 bg-white py-1.5 pl-3.5 pr-1.5 ring-1 ring-brand-100 sm:gap-3 sm:py-2 sm:pl-5 sm:pr-2"
           >
             <span className="shrink-0 text-[0.9375rem] font-medium text-muted">
               +230
@@ -79,7 +79,7 @@ export const PickupForm = ({ className }: { className?: string }) => {
             <button
               type="submit"
               aria-label="Request a pickup on WhatsApp"
-              className="grid size-11 shrink-0 place-items-center rounded-full bg-brand-700 text-white transition duration-200 ease-soft hover:bg-brand-800 active:scale-95 sm:size-12"
+              className="grid size-11 shrink-0 place-items-center rounded-btn bg-brand-700 text-white transition duration-200 ease-soft hover:bg-brand-800 active:scale-95 sm:size-12"
             >
               <ArrowRight className="size-5" strokeWidth={2.2} />
             </button>

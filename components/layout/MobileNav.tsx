@@ -40,7 +40,7 @@ export const MobileNav = () => {
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition duration-200 ease-soft hover:bg-white/15"
+        className="inline-flex size-10 items-center justify-center rounded-btn bg-white/10 text-white transition duration-200 ease-soft hover:bg-white/15"
       >
         {open ? <X className="size-5" /> : <Menu className="size-5" />}
       </button>
@@ -57,7 +57,7 @@ export const MobileNav = () => {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="fixed inset-x-3 top-[4.25rem] z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-[1.75rem] border border-line bg-white shadow-[0_24px_60px_-20px_rgba(17,24,39,0.35)] sm:inset-x-5"
+        className="fixed inset-x-3 top-[4.25rem] z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto border border-line bg-white shadow-[0_24px_60px_-20px_rgba(17,24,39,0.35)] sm:inset-x-5"
       >
         <div className="flex flex-col gap-6 px-5 py-6 sm:px-6 sm:py-7">
           <ul className="flex flex-col">
