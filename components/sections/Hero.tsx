@@ -1,90 +1,58 @@
-import Image from "next/image";
-import { ArrowRight, Phone } from "lucide-react";
 import { Button } from "@/components/ui/Button";
-import { Container } from "@/components/ui/Container";
-import { Icon } from "@/components/ui/Icon";
-import { MauritiusFlag, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { PickupForm } from "./PickupForm";
 import { ASSETS } from "@/lib/assets";
-import { CONTACT, WHATSAPP_MESSAGES, whatsappLink } from "@/lib/constants";
-import { HERO_HIGHLIGHTS } from "@/lib/data";
+import { SITE } from "@/lib/constants";
 
 export const Hero = () => (
-  <section id="top" className="relative overflow-hidden bg-canvas">
-    <Container className="relative">
-      <div className="grid items-center gap-10 pb-16 pt-12 md:pb-20 md:pt-16 lg:grid-cols-[1.05fr_0.95fr] lg:gap-12 lg:pb-24 lg:pt-20">
-        <div className="flex min-w-0 flex-col items-center text-center lg:items-start lg:text-left">
-          <span className="inline-flex animate-fade-in items-center gap-2.5 rounded-full border border-brand-200 bg-white py-1.5 pl-2 pr-4 text-[0.8125rem] font-medium text-brand-800 sm:text-sm">
-            <MauritiusFlag className="h-[1.125rem] w-[1.6875rem] shrink-0 rounded-[0.3rem]" />
-            {CONTACT.coverage}
-          </span>
+  <section
+    id="top"
+    className="relative flex min-h-[100svh] items-end overflow-hidden bg-ink"
+  >
+    {/* Full-bleed video plane — poster also covers reduced-motion / load gap */}
+    <div
+      className="absolute inset-0 bg-cover bg-center"
+      style={{ backgroundImage: `url(${ASSETS.heroPoster})` }}
+      aria-hidden
+    >
+      <video
+        autoPlay
+        muted
+        loop
+        playsInline
+        poster={ASSETS.heroPoster}
+        className="h-full w-full object-cover motion-reduce:hidden"
+      >
+        <source src={ASSETS.heroVideo} type="video/mp4" />
+      </video>
+      <div className="absolute inset-0 bg-gradient-to-t from-ink/75 via-ink/35 to-ink/45" />
+    </div>
 
-          <h1 className="mt-6 max-w-2xl animate-fade-up text-[2.25rem] font-bold leading-[1.08] tracking-[-0.03em] sm:text-[3.25rem] lg:text-[3.75rem] xl:text-[4.25rem]">
-            Turn Your Scrap <span className="text-brand-500">Into Cash</span>
-          </h1>
+    {/* Bottom-left content card — brand, headline, one line, one CTA */}
+    <div className="relative z-10 w-full px-4 pb-6 pt-28 sm:px-6 sm:pb-8 md:px-10 md:pb-12 lg:px-14 lg:pb-14">
+      <div className="max-w-xl animate-fade-up rounded-[2rem] bg-[#eceeed]/95 p-7 shadow-[0_24px_60px_-28px_rgba(0,0,0,0.45)] backdrop-blur-sm sm:rounded-[2.5rem] sm:p-9 md:max-w-[34rem] md:p-10">
+        <p className="text-[0.8125rem] font-semibold uppercase tracking-[0.14em] text-brand-700">
+          {SITE.name}
+        </p>
 
-          <p className="mt-5 flex max-w-full flex-wrap items-center justify-center gap-x-2.5 gap-y-1 text-[1.0625rem] text-muted md:gap-x-3 md:text-[1.25rem] lg:justify-start">
-            <span>Schedule</span>
-            <ArrowRight aria-hidden className="size-5 shrink-0 text-brand-500" />
-            <span>We Collect</span>
-            <ArrowRight aria-hidden className="size-5 shrink-0 text-brand-500" />
-            <span>You Get Paid Instantly</span>
-          </p>
+        <h1 className="mt-3 text-[2.35rem] font-bold italic leading-[0.95] tracking-[-0.03em] text-ink sm:text-[3.15rem] md:text-[3.5rem]">
+          FROM SCRAP
+          <br />
+          TO CASH
+        </h1>
 
-          <PickupForm className="self-stretch sm:self-center lg:self-start" />
+        <p className="mt-4 max-w-md text-[0.9375rem] leading-relaxed text-ink/75 sm:text-base">
+          Mauritius&apos; trusted scrap buyer. Free pickup, digital weighing,
+          and payment on the spot.
+        </p>
 
-          <div className="mt-6 flex w-full min-w-0 flex-col items-center gap-3 sm:w-auto sm:flex-row sm:justify-center lg:justify-start">
-            <Button
-              href={whatsappLink(WHATSAPP_MESSAGES.general)}
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              <WhatsAppIcon className="size-5" />
-              WhatsApp Pickup
-            </Button>
-
-            <Button
-              href={CONTACT.phonePrimary.href}
-              variant="secondary"
-              size="lg"
-              className="w-full sm:w-auto"
-            >
-              <Phone className="size-[1.125rem]" strokeWidth={1.9} />
-              Call Now
-            </Button>
-          </div>
-
-          <ul className="mt-10 flex flex-wrap justify-center gap-2.5 md:mt-12 md:gap-3 lg:justify-start">
-            {HERO_HIGHLIGHTS.map((highlight) => (
-              <li
-                key={highlight.label}
-                className="inline-flex items-center gap-2 rounded-full border border-brand-100 bg-white/80 py-2 pl-2.5 pr-4 text-[0.8125rem] font-medium text-ink/75 md:text-sm"
-              >
-                <span className="grid size-7 shrink-0 place-items-center rounded-full bg-brand-100 text-brand-700 md:size-8">
-                  <Icon name={highlight.icon} className="size-4" />
-                </span>
-                {highlight.label}
-              </li>
-            ))}
-          </ul>
-        </div>
-
-        <div className="relative mx-auto grid max-w-[28rem] place-items-center lg:mx-0 lg:max-w-none">
-          <div
-            aria-hidden
-            className="absolute inset-[8%] rounded-full bg-[radial-gradient(circle,rgba(34,197,94,0.18)_0%,transparent_70%)]"
-          />
-          <Image
-            src={ASSETS.hero}
-            alt="Digital scale weighing a bag of scrap metal beside copper wire and a green crate"
-            width={917}
-            height={1272}
-            priority
-            sizes="(min-width: 1024px) 40vw, (min-width: 640px) 50vw, 85vw"
-            className="relative h-auto w-full max-w-[420px] lg:max-w-[480px]"
-          />
-        </div>
+        <Button
+          href="/#how-it-works"
+          variant="dark"
+          size="md"
+          className="mt-7 rounded-full px-6"
+        >
+          See how it works
+        </Button>
       </div>
-    </Container>
+    </div>
   </section>
 );

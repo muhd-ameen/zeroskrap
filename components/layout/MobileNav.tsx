@@ -33,27 +33,23 @@ export const MobileNav = () => {
   }, [open]);
 
   return (
-    <div className="lg:hidden">
+    <div className="flex items-center lg:hidden">
       <button
         type="button"
         onClick={() => setOpen((value) => !value)}
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label={open ? "Close menu" : "Open menu"}
-        className="inline-flex size-11 items-center justify-center rounded-btn border border-line bg-white text-ink transition duration-200 ease-soft hover:bg-brand-50"
+        className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition duration-200 ease-soft hover:bg-white/15"
       >
         {open ? <X className="size-5" /> : <Menu className="size-5" />}
       </button>
 
-      {/*
-        Backdrop. Height is explicit rather than `bottom-0`: the sticky header
-        uses backdrop-blur, which makes it the containing block for fixed
-        children, so `bottom-0` would collapse against the 72px header.
-      */}
+      {/* Backdrop — fixed to viewport (header is fixed, not sticky) */}
       <div
         onClick={() => setOpen(false)}
         aria-hidden
-        className={`fixed inset-x-0 top-[72px] z-40 h-[100dvh] bg-ink/25 transition-opacity duration-200 ${
+        className={`fixed inset-0 z-40 bg-ink/40 transition-opacity duration-200 ${
           open ? "opacity-100" : "pointer-events-none opacity-0"
         }`}
       />
@@ -61,9 +57,9 @@ export const MobileNav = () => {
       <div
         id="mobile-menu"
         hidden={!open}
-        className="fixed inset-x-0 top-[72px] z-50 max-h-[calc(100dvh-72px)] overflow-y-auto border-b border-line bg-white"
+        className="fixed inset-x-3 top-[4.25rem] z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-[1.75rem] border border-line bg-white shadow-[0_24px_60px_-20px_rgba(17,24,39,0.35)] sm:inset-x-5"
       >
-        <div className="flex flex-col gap-6 px-6 py-7">
+        <div className="flex flex-col gap-6 px-5 py-6 sm:px-6 sm:py-7">
           <ul className="flex flex-col">
             {NAV_LINKS.map((link) => (
               <li key={link.label}>
@@ -85,6 +81,7 @@ export const MobileNav = () => {
               href={whatsappLink(WHATSAPP_MESSAGES.general)}
               size="lg"
               fullWidth
+              onClick={() => setOpen(false)}
             >
               <WhatsAppIcon className="size-5" />
               Book Pickup on WhatsApp
@@ -95,6 +92,7 @@ export const MobileNav = () => {
               variant="secondary"
               size="lg"
               fullWidth
+              onClick={() => setOpen(false)}
             >
               <Phone className="size-[1.125rem]" strokeWidth={1.9} />
               {CONTACT.phonePrimary.display}

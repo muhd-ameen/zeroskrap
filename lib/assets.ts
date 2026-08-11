@@ -17,6 +17,12 @@ export const ASSETS = {
   /** REAL ASSET - hero weighing diorama, transparent WebP, portrait ~0.72:1. */
   hero: "/images/hero/hero.webp",
 
+  /** REAL ASSET - full-bleed hero background video (muted loop). */
+  heroVideo: "/images/hero/hero.mp4",
+
+  /** REAL ASSET - poster frame for the hero video. */
+  heroPoster: "/images/hero/hero-poster.jpg",
+
   /** REAL ASSET - industrial weighbridge with scrap truck, landscape ~1.12:1. */
   trustWeighing: "/images/trust/scale.webp",
 

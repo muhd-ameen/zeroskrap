@@ -66,7 +66,7 @@ export const Button = ({
 
     if (isInternal) {
       return (
-        <Link href={href} className={classes} {...rest}>
+        <Link href={href} className={classes} onClick={onClick} {...rest}>
           {children}
         </Link>
       );
@@ -78,6 +78,7 @@ export const Button = ({
       <a
         href={href}
         className={classes}
+        onClick={onClick}
         target={isWebLink ? "_blank" : undefined}
         rel={isWebLink ? "noopener noreferrer" : undefined}
         {...rest}

@@ -9,7 +9,7 @@ import { MATERIALS } from "@/lib/data";
 export const Materials = () => (
   <Section
     id="materials"
-    className="relative overflow-hidden bg-white"
+    className="relative overflow-hidden bg-white !pt-28 md:!pt-32"
     aria-labelledby="materials-heading"
   >
     <SectionHeading

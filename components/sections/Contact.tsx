@@ -29,7 +29,11 @@ const DETAILS = [
 ];
 
 export const Contact = () => (
-  <Section id="contact" className="bg-white" aria-labelledby="contact-heading">
+  <Section
+    id="contact"
+    className="bg-white !pt-28 md:!pt-32"
+    aria-labelledby="contact-heading"
+  >
     {/* min-w-0 stops the select's intrinsic width from widening the column. */}
     <div className="grid gap-10 [&>*]:min-w-0 lg:grid-cols-[0.85fr_1.15fr] lg:gap-14">
       <div>
