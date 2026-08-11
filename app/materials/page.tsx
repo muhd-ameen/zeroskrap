@@ -1,28 +1,20 @@
-import type { Metadata } from "next";
 import { Materials } from "@/components/sections/Materials";
-import { SITE } from "@/lib/constants";
+import { MATERIALS } from "@/lib/data";
+import { DEFAULT_KEYWORDS, buildPageMetadata } from "@/lib/seo";
 
 const DESCRIPTION =
   "Scrap materials ZeroSkrap buys across Mauritius - iron, steel, copper, aluminium, e-waste, appliances, plastic, paper and industrial waste. Free pickup and cash on the spot.";
 
-export const metadata: Metadata = {
+export const metadata = buildPageMetadata({
   title: "Materials We Buy",
   description: DESCRIPTION,
-  alternates: { canonical: "/materials" },
-  openGraph: {
-    type: "website",
-    locale: SITE.locale,
-    url: `${SITE.url}/materials`,
-    siteName: SITE.name,
-    title: `Materials We Buy | ${SITE.name}`,
-    description: DESCRIPTION,
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: `Materials We Buy | ${SITE.name}`,
-    description: DESCRIPTION,
-  },
-};
+  path: "/materials",
+  ogTitle: `Materials We Buy | ZeroSkrap`,
+  keywords: [
+    ...DEFAULT_KEYWORDS,
+    ...MATERIALS.map((material) => `${material.name} Mauritius`),
+  ],
+});
 
 const MaterialsPage = () => <Materials />;
 

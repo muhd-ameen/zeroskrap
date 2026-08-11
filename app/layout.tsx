@@ -4,7 +4,8 @@ import "./globals.css";
 import { Navbar } from "@/components/layout/Navbar";
 import { Footer } from "@/components/layout/Footer";
 import { SITE } from "@/lib/constants";
-import { localBusinessSchema } from "@/lib/schema";
+import { jsonLdGraph } from "@/lib/schema";
+import { DEFAULT_KEYWORDS, SHARE_IMAGE } from "@/lib/seo";
 
 const poppins = Poppins({
   subsets: ["latin"],
@@ -12,16 +13,6 @@ const poppins = Poppins({
   variable: "--font-poppins",
   display: "swap",
 });
-
-/* WhatsApp only renders a large preview for images it can fetch quickly, so
-   this card is kept at 1200x630 and well under 300 KB. Replace
-   `assets/og-source.png` then run `node scripts/build-share-image.mjs`. */
-const SHARE_IMAGE = {
-  url: "/og-image.jpg",
-  width: 1200,
-  height: 630,
-  alt: `${SITE.name} - ${SITE.tagline}`,
-} as const;
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE.url),
@@ -31,19 +22,17 @@ export const metadata: Metadata = {
   },
   description: SITE.description,
   applicationName: SITE.name,
-  keywords: [
-    "scrap buyers Mauritius",
-    "sell scrap Mauritius",
-    "scrap metal Mauritius",
-    "recycling Mauritius",
-    "copper scrap price Mauritius",
-    "e-waste collection Mauritius",
-    "site clearance Mauritius",
-    "ZeroSkrap",
-  ],
-  authors: [{ name: SITE.name }],
+  keywords: [...DEFAULT_KEYWORDS],
+  authors: [{ name: SITE.name, url: SITE.url }],
   creator: SITE.name,
+  publisher: SITE.name,
+  category: "business",
   alternates: { canonical: "/" },
+  formatDetection: {
+    telephone: true,
+    email: true,
+    address: true,
+  },
   openGraph: {
     type: "website",
     locale: SITE.locale,
@@ -53,10 +42,10 @@ export const metadata: Metadata = {
     description: SITE.description,
     images: [
       {
-        url: SHARE_IMAGE.url,
+        url: SHARE_IMAGE.path,
         width: SHARE_IMAGE.width,
         height: SHARE_IMAGE.height,
-        type: "image/jpeg",
+        type: SHARE_IMAGE.type,
         alt: SHARE_IMAGE.alt,
       },
     ],
@@ -65,11 +54,22 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: `${SITE.name} - ${SITE.tagline}`,
     description: SITE.description,
-    images: [{ url: SHARE_IMAGE.url, alt: SHARE_IMAGE.alt }],
+    images: [{ url: SHARE_IMAGE.path, alt: SHARE_IMAGE.alt }],
   },
   robots: {
     index: true,
     follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+      "max-video-preview": -1,
+    },
+  },
+  icons: {
+    icon: [{ url: "/icon.png", type: "image/png" }],
+    apple: [{ url: "/apple-icon.png", type: "image/png" }],
   },
 };
 
@@ -80,7 +80,7 @@ export const viewport: Viewport = {
 };
 
 const RootLayout = ({ children }: { children: React.ReactNode }) => (
-  <html lang="en" className={poppins.variable}>
+  <html lang="en-MU" className={poppins.variable}>
     <body className="min-h-screen bg-canvas font-sans text-ink">
       <a
         href="#main"
@@ -96,7 +96,7 @@ const RootLayout = ({ children }: { children: React.ReactNode }) => (
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
-          __html: JSON.stringify(localBusinessSchema),
+          __html: JSON.stringify(jsonLdGraph),
         }}
       />
     </body>
