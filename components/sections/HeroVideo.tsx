@@ -4,8 +4,11 @@ import { useEffect, useRef } from "react";
 import { ASSETS } from "@/lib/assets";
 
 /**
- * Full-bleed hero loop. Mobile Safari only autoplays when muted + playsInline
- * are set as real DOM properties and play() is invoked after the element is ready.
+ * Full-bleed hero loop.
+ *
+ * iOS Safari (especially Low Power Mode / cellular) often ignores the autoplay
+ * attribute. We force muted + playsInline on the DOM node, call play() when
+ * the file is ready, and unlock on the first user gesture as a fallback.
  */
 export const HeroVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
@@ -24,39 +27,103 @@ export const HeroVideo = () => {
       return;
     }
 
-    // React's muted prop can miss Safari's autoplay gate — force both.
-    video.defaultMuted = true;
-    video.muted = true;
-    video.playsInline = true;
-    video.setAttribute("playsinline", "true");
-    video.setAttribute("webkit-playsinline", "true");
-    video.setAttribute("muted", "");
+    const armMutedInline = () => {
+      video.defaultMuted = true;
+      video.muted = true;
+      video.volume = 0;
+      video.playsInline = true;
+      video.setAttribute("muted", "");
+      video.setAttribute("playsinline", "true");
+      video.setAttribute("webkit-playsinline", "true");
+    };
 
-    const tryPlay = () => {
-      const playPromise = video.play();
-      if (playPromise !== undefined) {
-        void playPromise.catch(() => {
-          // Autoplay blocked (Low Power Mode, data saver). Poster stays visible.
+    armMutedInline();
+
+    let unlocked = false;
+
+    const tryPlay = async () => {
+      if (!video.paused) {
+        unlocked = true;
+        detachGestures();
+        return;
+      }
+
+      armMutedInline();
+
+      try {
+        await video.play();
+        unlocked = true;
+        detachGestures();
+      } catch {
+        // Still blocked — wait for a user gesture.
+      }
+    };
+
+    const onGesture = () => {
+      void tryPlay();
+    };
+
+    const gestureEvents = [
+      "touchstart",
+      "touchend",
+      "pointerdown",
+      "click",
+      "scroll",
+    ] as const;
+
+    const attachGestures = () => {
+      for (const event of gestureEvents) {
+        document.addEventListener(event, onGesture, {
+          capture: true,
+          passive: true,
         });
       }
     };
 
-    tryPlay();
+    const detachGestures = () => {
+      for (const event of gestureEvents) {
+        document.removeEventListener(event, onGesture, {
+          capture: true,
+        } as EventListenerOptions);
+      }
+    };
 
-    const onReady = () => tryPlay();
+    attachGestures();
+
+    // Kick off load + play as soon as bytes are available.
+    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
+      void tryPlay();
+    } else {
+      video.load();
+    }
+
+    const onReady = () => {
+      void tryPlay();
+    };
+
+    video.addEventListener("loadedmetadata", onReady);
     video.addEventListener("loadeddata", onReady);
     video.addEventListener("canplay", onReady);
+    video.addEventListener("canplaythrough", onReady);
 
-    // Resume if the tab was backgrounded or bfcache-restored.
     const onVisible = () => {
-      if (document.visibilityState === "visible" && video.paused) tryPlay();
+      if (document.visibilityState === "visible") void tryPlay();
     };
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("pageshow", onVisible);
 
+    // One more attempt after layout settles (hydration / font swap).
+    const bootTimer = window.setTimeout(() => {
+      void tryPlay();
+    }, 250);
+
     return () => {
+      window.clearTimeout(bootTimer);
+      detachGestures();
+      video.removeEventListener("loadedmetadata", onReady);
       video.removeEventListener("loadeddata", onReady);
       video.removeEventListener("canplay", onReady);
+      video.removeEventListener("canplaythrough", onReady);
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("pageshow", onVisible);
     };
