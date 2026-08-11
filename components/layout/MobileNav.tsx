@@ -3,15 +3,8 @@
 import Link from "next/link";
 import { useEffect, useState } from "react";
 import { Menu, Phone, X } from "lucide-react";
-import { Button } from "@/components/ui/Button";
-import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
-import { RegionDropdown } from "./RegionDropdown";
-import {
-  CONTACT,
-  NAV_LINKS,
-  WHATSAPP_MESSAGES,
-  whatsappLink,
-} from "@/lib/constants";
+import { Logo } from "@/components/ui/Logo";
+import { CONTACT, NAV_LINKS } from "@/lib/constants";
 
 export const MobileNav = () => {
   const [open, setOpen] = useState(false);
@@ -36,81 +29,72 @@ export const MobileNav = () => {
     <div className="flex items-center lg:hidden">
       <button
         type="button"
-        onClick={() => setOpen((value) => !value)}
+        onClick={() => setOpen(true)}
         aria-expanded={open}
         aria-controls="mobile-menu"
-        aria-label={open ? "Close menu" : "Open menu"}
-        className="inline-flex size-10 items-center justify-center rounded-lg bg-white/10 text-white transition duration-200 ease-soft hover:bg-white/15"
+        aria-label="Open menu"
+        className="inline-flex size-10 items-center justify-center rounded-full bg-white/10 text-white transition duration-200 ease-soft hover:bg-white/15"
       >
-        {open ? <X className="size-5" /> : <Menu className="size-5" />}
+        <Menu className="size-5" />
       </button>
 
-      {/* Backdrop — fixed to viewport (header is fixed, not sticky) */}
-      <div
-        onClick={() => setOpen(false)}
-        aria-hidden
-        className={`fixed inset-0 z-40 bg-ink/40 transition-opacity duration-200 ${
-          open ? "opacity-100" : "pointer-events-none opacity-0"
-        }`}
-      />
+      {open ? (
+        <div className="fixed inset-0 z-[60] flex flex-col px-3 pb-3 pt-3 sm:px-5 sm:pb-4 sm:pt-4">
+          {/* Dimmed page behind */}
+          <div
+            className="absolute inset-0 bg-ink/55 backdrop-blur-[2px]"
+            onClick={() => setOpen(false)}
+            aria-hidden
+          />
 
-      <div
-        id="mobile-menu"
-        hidden={!open}
-        className="fixed inset-x-3 top-[4.25rem] z-50 max-h-[calc(100dvh-5.5rem)] overflow-y-auto rounded-lg border border-line bg-white shadow-[0_24px_60px_-20px_rgba(17,24,39,0.35)] sm:inset-x-5"
-      >
-        <div className="flex flex-col gap-6 px-5 py-6 sm:px-6 sm:py-7">
-          <ul className="flex flex-col">
-            {NAV_LINKS.map((link) => (
-              <li key={link.label}>
-                <Link
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="flex items-center rounded-btn px-3 py-3.5 text-lg font-medium text-ink transition duration-200 ease-soft hover:bg-brand-50"
-                >
-                  {link.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
-
-          <div className="flex flex-col gap-3 border-t border-line pt-6">
-            <RegionDropdown fullWidth />
-
-            <Button
-              href={whatsappLink(WHATSAPP_MESSAGES.general)}
-              size="lg"
-              fullWidth
+          {/* Light top pill — logo + close */}
+          <div className="relative z-10 flex h-14 shrink-0 items-center justify-between rounded-full bg-[#eceeed] px-4 shadow-[0_8px_30px_-12px_rgba(0,0,0,0.35)] sm:h-[3.75rem] sm:px-5">
+            <Logo tone="dark" size={34} className="shrink-0" />
+            <button
+              type="button"
               onClick={() => setOpen(false)}
+              aria-label="Close menu"
+              className="inline-flex size-10 items-center justify-center rounded-full bg-ink text-white transition duration-200 ease-soft hover:bg-ink/85"
             >
-              <WhatsAppIcon className="size-5" />
-              Book Pickup on WhatsApp
-            </Button>
+              <X className="size-5" strokeWidth={2.2} />
+            </button>
+          </div>
 
-            <Button
-              href={CONTACT.phonePrimary.href}
-              variant="secondary"
-              size="lg"
-              fullWidth
-              onClick={() => setOpen(false)}
-            >
-              <Phone className="size-[1.125rem]" strokeWidth={1.9} />
-              {CONTACT.phonePrimary.display}
-            </Button>
+          {/* Menu panel */}
+          <div
+            id="mobile-menu"
+            className="relative z-10 mt-3 flex min-h-0 flex-1 flex-col overflow-y-auto rounded-[1.75rem] bg-[#eceeed] px-6 pb-6 pt-8 shadow-[0_24px_60px_-20px_rgba(0,0,0,0.4)] sm:rounded-[2rem] sm:px-8 sm:pb-8 sm:pt-10"
+          >
+            <ul className="flex flex-col gap-1">
+              {NAV_LINKS.map((link) => (
+                <li key={link.label}>
+                  <Link
+                    href={link.href}
+                    onClick={() => setOpen(false)}
+                    className="block py-2.5 text-[1.625rem] font-semibold leading-tight tracking-[-0.02em] text-ink transition duration-200 ease-soft hover:text-brand-600"
+                  >
+                    {link.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
 
-            <a
-              href={CONTACT.instagram}
-              target="_blank"
-              rel="noopener noreferrer"
-              onClick={() => setOpen(false)}
-              className="inline-flex h-12 items-center justify-center gap-2.5 rounded-btn border border-line bg-white text-base font-medium text-ink transition duration-200 ease-soft hover:bg-brand-50"
-            >
-              <InstagramIcon className="size-5" />
-              Instagram
-            </a>
+            <div className="mt-auto flex flex-col gap-5 pt-10">
+              <p className="max-w-[16rem] font-mono text-[0.75rem] leading-relaxed text-ink/55">
+                {CONTACT.address.full}
+              </p>
+
+              <a
+                href={CONTACT.phonePrimary.href}
+                className="inline-flex w-fit items-center gap-2.5 rounded-full bg-ink px-5 py-3.5 text-[0.9375rem] font-semibold text-white transition duration-200 ease-soft hover:bg-ink/90"
+              >
+                <Phone className="size-4 shrink-0" strokeWidth={2.1} aria-hidden />
+                {CONTACT.phonePrimary.display}
+              </a>
+            </div>
           </div>
         </div>
-      </div>
+      ) : null}
     </div>
   );
 };

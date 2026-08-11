@@ -137,6 +137,24 @@
     border-radius: 0.25rem;
   }
 
+  /*
+   * Hero background video — kill native play overlays on WebKit / Blink.
+   * Combined with opacity-0 until `playing`, users never see a giant play CTA.
+   */
+  .hero-video::-webkit-media-controls,
+  .hero-video::-webkit-media-controls-enclosure,
+  .hero-video::-webkit-media-controls-panel,
+  .hero-video::-webkit-media-controls-overlay-play-button,
+  .hero-video::-webkit-media-controls-start-playback-button,
+  .hero-video::-webkit-media-controls-play-button {
+    display: none !important;
+    -webkit-appearance: none !important;
+    opacity: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+    pointer-events: none !important;
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html {
       scroll-behavior: auto;

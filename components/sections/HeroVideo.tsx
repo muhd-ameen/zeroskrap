@@ -1,61 +1,70 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import { ASSETS } from "@/lib/assets";
+import { cn } from "@/lib/utils";
 
 /**
- * Full-bleed hero loop.
+ * Full-bleed muted hero loop tuned for mobile Chrome / iOS Safari.
  *
- * iOS Safari (especially Low Power Mode / cellular) often ignores the autoplay
- * attribute. We force muted + playsInline on the DOM node, call play() when
- * the file is ready, and unlock on the first user gesture as a fallback.
+ * Why this shape works:
+ * 1. Never put `autoplay` in the markup — on Low Power Mode / strict autoplay
+ *    policies, that attribute forces a native play overlay you cannot hide.
+ * 2. Arm muted + playsInline BEFORE assigning `src`, then call play() from JS.
+ * 3. Keep the <video> invisible until the `playing` event — poster underneath
+ *    covers the gap, so users never see a giant play button.
+ * 4. First touch / scroll unlocks playback when the browser still blocks it.
  */
 export const HeroVideo = () => {
   const videoRef = useRef<HTMLVideoElement>(null);
+  const [visible, setVisible] = useState(false);
 
   useEffect(() => {
     const video = videoRef.current;
     if (!video) return;
 
-    const reduceMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
-
-    if (reduceMotion) {
-      video.pause();
-      video.removeAttribute("autoplay");
+    if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       return;
     }
 
-    const armMutedInline = () => {
+    let cancelled = false;
+    let playing = false;
+
+    const arm = () => {
       video.defaultMuted = true;
       video.muted = true;
       video.volume = 0;
       video.playsInline = true;
+      video.loop = true;
+      video.disablePictureInPicture = true;
       video.setAttribute("muted", "");
-      video.setAttribute("playsinline", "true");
-      video.setAttribute("webkit-playsinline", "true");
+      video.setAttribute("playsinline", "");
+      video.setAttribute("webkit-playsinline", "");
+      video.setAttribute("x5-playsinline", "true");
+      video.setAttribute("x5-video-player-type", "h5");
+      video.setAttribute("x5-video-player-fullscreen", "false");
     };
 
-    armMutedInline();
-
-    let unlocked = false;
+    const markPlaying = () => {
+      if (cancelled || playing) return;
+      playing = true;
+      setVisible(true);
+      detachGestures();
+    };
 
     const tryPlay = async () => {
-      if (!video.paused) {
-        unlocked = true;
-        detachGestures();
+      if (cancelled || !video.paused) {
+        if (!video.paused) markPlaying();
         return;
       }
 
-      armMutedInline();
+      arm();
 
       try {
         await video.play();
-        unlocked = true;
-        detachGestures();
+        markPlaying();
       } catch {
-        // Still blocked — wait for a user gesture.
+        // Blocked until a gesture — poster stays; video stays opacity-0.
       }
     };
 
@@ -65,15 +74,16 @@ export const HeroVideo = () => {
 
     const gestureEvents = [
       "touchstart",
-      "touchend",
       "pointerdown",
       "click",
+      "keydown",
       "scroll",
+      "wheel",
     ] as const;
 
     const attachGestures = () => {
       for (const event of gestureEvents) {
-        document.addEventListener(event, onGesture, {
+        window.addEventListener(event, onGesture, {
           capture: true,
           passive: true,
         });
@@ -82,29 +92,36 @@ export const HeroVideo = () => {
 
     const detachGestures = () => {
       for (const event of gestureEvents) {
-        document.removeEventListener(event, onGesture, {
+        window.removeEventListener(event, onGesture, {
           capture: true,
         } as EventListenerOptions);
       }
     };
 
+    arm();
     attachGestures();
 
-    // Kick off load + play as soon as bytes are available.
-    if (video.readyState >= HTMLMediaElement.HAVE_CURRENT_DATA) {
-      void tryPlay();
-    } else {
-      video.load();
+    // Assign src only after mute is locked — avoids a unmuted autoplay attempt.
+    if (video.getAttribute("src") !== ASSETS.heroVideo) {
+      video.src = ASSETS.heroVideo;
     }
+    video.load();
 
+    const onPlaying = () => markPlaying();
     const onReady = () => {
       void tryPlay();
     };
 
-    video.addEventListener("loadedmetadata", onReady);
+    video.addEventListener("playing", onPlaying);
     video.addEventListener("loadeddata", onReady);
     video.addEventListener("canplay", onReady);
-    video.addEventListener("canplaythrough", onReady);
+
+    // Apple pattern: start via timed JS play(), not the autoplay attribute.
+    const bootTimers = [0, 100, 400, 1000].map((ms) =>
+      window.setTimeout(() => {
+        void tryPlay();
+      }, ms),
+    );
 
     const onVisible = () => {
       if (document.visibilityState === "visible") void tryPlay();
@@ -112,18 +129,27 @@ export const HeroVideo = () => {
     document.addEventListener("visibilitychange", onVisible);
     window.addEventListener("pageshow", onVisible);
 
-    // One more attempt after layout settles (hydration / font swap).
-    const bootTimer = window.setTimeout(() => {
-      void tryPlay();
-    }, 250);
+    const io =
+      typeof IntersectionObserver !== "undefined"
+        ? new IntersectionObserver(
+            (entries) => {
+              if (entries.some((entry) => entry.isIntersecting)) {
+                void tryPlay();
+              }
+            },
+            { threshold: 0.15 },
+          )
+        : null;
+    io?.observe(video);
 
     return () => {
-      window.clearTimeout(bootTimer);
+      cancelled = true;
+      bootTimers.forEach((id) => window.clearTimeout(id));
       detachGestures();
-      video.removeEventListener("loadedmetadata", onReady);
+      io?.disconnect();
+      video.removeEventListener("playing", onPlaying);
       video.removeEventListener("loadeddata", onReady);
       video.removeEventListener("canplay", onReady);
-      video.removeEventListener("canplaythrough", onReady);
       document.removeEventListener("visibilitychange", onVisible);
       window.removeEventListener("pageshow", onVisible);
     };
@@ -132,17 +158,19 @@ export const HeroVideo = () => {
   return (
     <video
       ref={videoRef}
-      autoPlay
       muted
       loop
       playsInline
       preload="auto"
-      poster={ASSETS.heroPoster}
-      src={ASSETS.heroVideo}
       controls={false}
       disablePictureInPicture
       disableRemotePlayback
-      className="pointer-events-none h-full w-full object-cover motion-reduce:hidden"
+      // No autoPlay / poster / src here — see effect above.
+      className={cn(
+        "hero-video pointer-events-none h-full w-full object-cover motion-reduce:hidden",
+        "transition-opacity duration-500 ease-soft",
+        visible ? "opacity-100" : "opacity-0",
+      )}
       aria-hidden
     />
   );
