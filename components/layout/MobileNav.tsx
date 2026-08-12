@@ -7,8 +7,12 @@ import { Menu, Phone, X } from "lucide-react";
 import { Logo } from "@/components/ui/Logo";
 import { CONTACT, NAV_LINKS } from "@/lib/constants";
 
-export const MobileNav = () => {
-  const [open, setOpen] = useState(false);
+type MobileNavProps = {
+  open: boolean;
+  onOpenChange: (open: boolean) => void;
+};
+
+export const MobileNav = ({ open, onOpenChange }: MobileNavProps) => {
   const [mounted, setMounted] = useState(false);
 
   useEffect(() => {
@@ -19,7 +23,7 @@ export const MobileNav = () => {
     if (!open) return;
 
     const onKeyDown = (event: KeyboardEvent) => {
-      if (event.key === "Escape") setOpen(false);
+      if (event.key === "Escape") onOpenChange(false);
     };
 
     document.addEventListener("keydown", onKeyDown);
@@ -29,7 +33,7 @@ export const MobileNav = () => {
       document.removeEventListener("keydown", onKeyDown);
       document.body.style.overflow = "";
     };
-  }, [open]);
+  }, [open, onOpenChange]);
 
   const menu =
     open && mounted
@@ -37,7 +41,7 @@ export const MobileNav = () => {
           <div className="fixed inset-0 z-[100] flex flex-col px-3 pb-3 pt-3 sm:px-5 sm:pb-4 sm:pt-4">
             <div
               className="absolute inset-0 bg-ink/60"
-              onClick={() => setOpen(false)}
+              onClick={() => onOpenChange(false)}
               aria-hidden
             />
 
@@ -45,7 +49,7 @@ export const MobileNav = () => {
               <Logo tone="dark" size={34} className="shrink-0" />
               <button
                 type="button"
-                onClick={() => setOpen(false)}
+                onClick={() => onOpenChange(false)}
                 aria-label="Close menu"
                 className="inline-flex size-10 items-center justify-center rounded-full bg-ink text-white"
               >
@@ -62,7 +66,7 @@ export const MobileNav = () => {
                   <li key={link.label}>
                     <Link
                       href={link.href}
-                      onClick={() => setOpen(false)}
+                      onClick={() => onOpenChange(false)}
                       className="block py-2.5 text-[1.625rem] font-semibold leading-tight tracking-[-0.02em] text-ink"
                     >
                       {link.label}
@@ -98,7 +102,7 @@ export const MobileNav = () => {
     <div className="flex items-center lg:hidden">
       <button
         type="button"
-        onClick={() => setOpen(true)}
+        onClick={() => onOpenChange(true)}
         aria-expanded={open}
         aria-controls="mobile-menu"
         aria-label="Open menu"

@@ -12,6 +12,7 @@ import { CONTACT, NAV_LINKS } from "@/lib/constants";
 export const Navbar = () => {
   const pathname = usePathname();
   const [pastHero, setPastHero] = useState(false);
+  const [menuOpen, setMenuOpen] = useState(false);
   const solid = pathname !== "/" || pastHero;
 
   useEffect(() => {
@@ -37,7 +38,13 @@ export const Navbar = () => {
   }, [pathname]);
 
   return (
-    <header className="pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 md:px-6">
+    <header
+      className={cn(
+        "pointer-events-none fixed inset-x-0 top-0 z-50 px-3 pt-3 sm:px-5 sm:pt-4 md:px-6",
+        // Hide the dark bar while the light mobile menu overlay is open.
+        menuOpen && "invisible",
+      )}
+    >
       <nav
         aria-label="Main"
         className={cn(
@@ -77,7 +84,7 @@ export const Navbar = () => {
           </a>
         </div>
 
-        <MobileNav />
+        <MobileNav open={menuOpen} onOpenChange={setMenuOpen} />
       </nav>
     </header>
   );
