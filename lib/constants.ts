@@ -20,8 +20,8 @@ export const CONTACT = {
     href: "tel:+23059297307",
   },
   /* WhatsApp runs on a separate line. International format, digits only. */
-  whatsappNumber: "23057920756",
-  whatsappDisplay: "+230 5792 0756",
+  whatsappNumber: "23057962874",
+  whatsappDisplay: "+230 5796 2874",
   email: "info@zeroskrap.com",
   emailHref: "mailto:info@zeroskrap.com",
   facebook:
