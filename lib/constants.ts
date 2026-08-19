@@ -14,19 +14,18 @@ export const SITE = {
 } as const;
 
 export const CONTACT = {
+  /* Voice line - every tel: link on the site points here. */
   phonePrimary: {
-    display: "+230 5792 0756",
-    href: "tel:+23057920756",
+    display: "+230 5929 7307",
+    href: "tel:+23059297307",
   },
-  /* PLACEHOLDER number - replace with the real second line. */
-  phoneSecondary: {
-    display: "+230 5000 0000",
-    href: "tel:+23050000000",
-  },
-  /* International format, digits only - used to build wa.me links. */
+  /* WhatsApp runs on a separate line. International format, digits only. */
   whatsappNumber: "23057920756",
-  /* PLACEHOLDER email. */
-  email: "hello@zeroskrap.mu",
+  whatsappDisplay: "+230 5792 0756",
+  email: "info@zeroskrap.com",
+  emailHref: "mailto:info@zeroskrap.com",
+  facebook:
+    "https://www.facebook.com/people/Zeroskrap-Mauritius/61592839966882/",
   /* Derived from the @zero.skrap handle - confirm the profile URL before launch. */
   instagramHandle: "@zero.skrap",
   instagram: "https://www.instagram.com/zero.skrap",

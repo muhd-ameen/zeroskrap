@@ -303,7 +303,7 @@ https://wa.me/23057920756
 
 Secondary:
 
-tel:+23057920756
+tel:+23059297307
 
 The contact section should support:
 

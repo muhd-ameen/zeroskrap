@@ -1,7 +1,11 @@
 import { ArrowRight, Phone } from "lucide-react";
 import { Container } from "@/components/ui/Container";
 import { Logo } from "@/components/ui/Logo";
-import { InstagramIcon, WhatsAppIcon } from "@/components/ui/BrandIcons";
+import {
+  FacebookIcon,
+  InstagramIcon,
+  WhatsAppIcon,
+} from "@/components/ui/BrandIcons";
 import {
   CONTACT,
   SITE,
@@ -10,6 +14,11 @@ import {
 } from "@/lib/constants";
 
 const SOCIALS = [
+  {
+    label: "Facebook",
+    href: CONTACT.facebook,
+    Icon: FacebookIcon,
+  },
   {
     label: "Instagram",
     href: CONTACT.instagram,

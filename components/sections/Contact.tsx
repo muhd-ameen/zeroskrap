@@ -1,3 +1,4 @@
+import type { LucideIcon } from "lucide-react";
 import { Clock, Mail, MapPin, Phone, Truck } from "lucide-react";
 import { Button } from "@/components/ui/Button";
 import { Section } from "@/components/ui/Section";
@@ -5,7 +6,15 @@ import { WhatsAppIcon } from "@/components/ui/BrandIcons";
 import { CONTACT, WHATSAPP_MESSAGES, whatsappLink } from "@/lib/constants";
 import { ContactForm } from "./ContactForm";
 
-const DETAILS = [
+type Detail = {
+  icon: LucideIcon;
+  label: string;
+  value: string;
+  /** Optional - renders the value as a link (e.g. mailto:). */
+  href?: string;
+};
+
+const DETAILS: readonly Detail[] = [
   {
     icon: MapPin,
     label: "Our yard",
@@ -25,6 +34,7 @@ const DETAILS = [
     icon: Mail,
     label: "Email",
     value: CONTACT.email,
+    href: CONTACT.emailHref,
   },
 ];
 
@@ -76,7 +86,7 @@ export const Contact = () => (
         </div>
 
         <ul className="mt-10 space-y-5">
-          {DETAILS.map(({ icon: Glyph, label, value }) => (
+          {DETAILS.map(({ icon: Glyph, label, value, href }) => (
             <li key={label} className="flex gap-4">
               <span className="grid size-11 shrink-0 place-items-center rounded-xl bg-brand-50 text-brand-600 ring-1 ring-brand-100">
                 <Glyph className="size-5" strokeWidth={1.9} aria-hidden />
@@ -84,7 +94,16 @@ export const Contact = () => (
               <div>
                 <h3 className="text-sm font-semibold text-ink">{label}</h3>
                 <p className="mt-0.5 text-[0.9375rem] leading-relaxed text-muted">
-                  {value}
+                  {href ? (
+                    <a
+                      href={href}
+                      className="transition-colors duration-200 hover:text-brand-600"
+                    >
+                      {value}
+                    </a>
+                  ) : (
+                    value
+                  )}
                 </p>
               </div>
             </li>

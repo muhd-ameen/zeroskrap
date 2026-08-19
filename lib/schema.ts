@@ -57,7 +57,7 @@ export const jsonLdGraph = {
         opens: "08:00",
         closes: "18:00",
       },
-      sameAs: [CONTACT.instagram],
+      sameAs: [CONTACT.facebook, CONTACT.instagram],
       contactPoint: [
         {
           "@type": "ContactPoint",
